@@ -1,6 +1,7 @@
 (*
 add_line_no.scpt
-初回作成　20160303　
+20160303　初回作成　
+20160305　ゼロサプレス処理変更
 テキストデータに行番号を付加してその後にタブを挿入し
 タブ区切りテキスト形式に変換した出力を
 テキストエディタに表示します。
@@ -91,32 +92,23 @@ end open
 
 
 ----ゼロサプレスのサブルーチン
+#nに処理する値
+#totalnoに最大数
+#ゼロサプレス処理をします
 to doZeroSuppress(n, totalno)
-	if totalno < 10 then
-		return n as text
-	else if totalno < 100 then
-		if n < 10 then
-			return "0" & n
-		else
-			return n as text
-		end if
-	else if totalno < 1000 then
-		if n < 10 then
-			return "00" & n
-		else if n < 100 then
-			return "0" & n
-		else
-			return n as text
-		end if
-	else if totalno < 10000 then
-		if n < 10 then
-			return "000" & n
-		else if n < 100 then
-			return "00" & n
-		else if n < 1000 then
-			return "0" & n
-		else
-			return n as text
-		end if
-	end if
+	---戻り値の初期化
+	set theSupZero to "" as text
+	---最大数の桁数を数える
+	set theCntTotal to (count of (totalno as text)) as number
+	---処理する値の桁数を数える
+	set theCntN to (count of (n as text)) as number
+	---差分を求める
+	set numZeoCnt to ((theCntTotal) - (theCntN)) as number
+	---桁数の差だけ処理する
+	repeat numZeoCnt times
+		---戻り値にゼロを追加
+		set theSupZero to (theSupZero & "0") as text
+	end repeat
+	---戻り値を返す
+	return (theSupZero & n) as text
 end doZeroSuppress
