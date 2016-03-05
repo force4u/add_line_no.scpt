@@ -92,23 +92,23 @@ end open
 
 
 ----ゼロサプレスのサブルーチン
-#nに処理する値
-#totalnoに最大数
+#numValに処理する値
+#numMaxValに最大数
 #ゼロサプレス処理をします
-to doZeroSuppress(n, totalno)
+to doZeroSuppress(numVal, numMaxVal)
 	---戻り値の初期化
 	set theSupZero to "" as text
 	---最大数の桁数を数える
-	set theCntTotal to (count of (totalno as text)) as number
+	set numCntTotal to (count of (numMaxVal as text)) as number
 	---処理する値の桁数を数える
-	set theCntN to (count of (n as text)) as number
+	set numCntN to (count of (numVal as text)) as number
 	---差分を求める
-	set numZeoCnt to ((theCntTotal) - (theCntN)) as number
+	set numZeoCnt to ((numCntTotal) - (numCntN)) as number
 	---桁数の差だけ処理する
 	repeat numZeoCnt times
 		---戻り値にゼロを追加
 		set theSupZero to (theSupZero & "0") as text
 	end repeat
 	---戻り値を返す
-	return (theSupZero & n) as text
+	return (theSupZero & numVal) as text
 end doZeroSuppress
